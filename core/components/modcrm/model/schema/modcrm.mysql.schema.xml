@@ -6,7 +6,6 @@
 		<field key="category" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="type" dbtype="text" phptype="text" null="true" default="" />
 		<field key="property_type" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
-        <field key="date_add" dbtype="integer" precision="60" phptype="integer" null="true" default="0" />
         <field key="price" dbtype="integer" precision="60" phptype="integer" null="true" default="0" />
         <field key="price_torg" dbtype="integer" precision="10" phptype="integer" null="true" default="0" />
         <field key="fio" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
@@ -33,6 +32,17 @@
         <field key="documents" dbtype="text" phptype="text" null="true" default="" />
         <field key="documents_dkp" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
 
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="createdby" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+
+        <field key="editedon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="editedby" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+
+        <field key="published" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />
+        <field key="deleted" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" />
+        <field key="deletedon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="deletedby" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+
 		<index alias="adress" name="adress" primary="false" unique="false" type="BTREE">
 			<column key="adress" length="" collation="A" null="false" />
 		</index>
@@ -44,29 +54,59 @@
     </object>
 
     <object class="crmFile" table="modcrm_files" extends="xPDOSimpleObject">
-        <field key="fio" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
-        <field key="date_add" dbtype="integer" precision="60" phptype="integer" null="true" default="0" />
-        <field key="phone" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
-        <field key="adress" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
-        <field key="price" dbtype="integer" precision="10" phptype="integer" null="true" default="0" />
-        <field key="price_type" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+       <field key="parent" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+       <field key="class" dbtype="varchar" precision="100" phptype="string" />
+       <field key="source" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="true" default="1" />
+       <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+       <field key="description" dbtype="text" phptype="string" null="true" />
+       <field key="path" dbtype="varchar" precision="255" phptype="string" null="false" />
+       <field key="file" dbtype="varchar" precision="255" phptype="string" null="false" />
+       <field key="type" dbtype="varchar" precision="50" phptype="string" null="true" />
+       <field key="size" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
+       <field key="createdon" dbtype="datetime" phptype="datetime" null="true" default="0000-00-00 00:00:00" />
+       <field key="createdby" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
+       <field key="url" dbtype="varchar" precision="255" phptype="string" null="false" />
+       <field key="thumb" dbtype="varchar" precision="255" phptype="string" null="false" />
+       <field key="deleted" dbtype="tinyint" precision="1" phptype="boolean" null="true" default="0" />
+       <field key="properties" dbtype="text" phptype="json" null="true" />
+       <field key="hash" dbtype="char" precision="40" phptype="string" null="true" default="" index="index" />
 
-        <index alias="fio" name="fio" primary="false" unique="false" type="BTREE">
-            <column key="fio" length="" collation="A" null="false" />
-        </index>
-
-        <composite alias="Events" class="crmEvent" local="id" foreign="client_id" cardinality="many" owner="local" />
-        <composite alias="Comments" class="crmComment" local="id" foreign="client_id" cardinality="many" owner="local" />
-        <aggregate alias="Histories" class="crmHistory" local="id" foreign="client_id" cardinality="one" owner="local" />
-    </object>
+            <index alias="parent" name="parent" primary="false" unique="false" type="BTREE">
+                <column key="parent" length="" collation="A" null="false" />
+                <column key="class" length="" collation="A" null="false" />
+            </index>
+            <index alias="source" name="source" primary="false" unique="false" type="BTREE">
+                <column key="source" length="" collation="A" null="false" />
+            </index>
+            <index alias="type" name="type" primary="false" unique="false" type="BTREE">
+                <column key="type" length="" collation="A" null="false" />
+            </index>
+            <index alias="deleted" name="deleted" primary="false" unique="false" type="BTREE">
+                <column key="deleted" length="" collation="A" null="false" />
+            </index>
+            <index alias="hash" name="hash" primary="false" unique="false" type="BTREE" >
+                <column key="hash" length="" collation="A" null="false" />
+            </index>
+        </object>
 
     <object class="crmClient" table="modcrm_clients" extends="xPDOSimpleObject">
         <field key="fio" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
-        <field key="date_add" dbtype="integer" precision="60" phptype="integer" null="true" default="0" />
         <field key="phone" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
         <field key="adress" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
         <field key="price" dbtype="integer" precision="10" phptype="integer" null="true" default="0" />
         <field key="price_type" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="createdby" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+
+        <field key="editedon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="editedby" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+
+        <field key="published" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />
+        <field key="deleted" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" />
+        <field key="deletedon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="deletedby" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+
 
         <index alias="fio" name="fio" primary="false" unique="false" type="BTREE">
             <column key="fio" length="" collation="A" null="false" />
@@ -81,8 +121,18 @@
         <field key="object_id" dbtype="integer" precision="60" phptype="integer" attributes="unsigned" null="true" default="0" />
         <field key="client_id" dbtype="integer" precision="60" phptype="integer" attributes="unsigned" null="true" default="0" />
         <field key="user_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
-        <field key="date_add" dbtype="integer" precision="60" phptype="integer" null="true" default="0" />
         <field key="comment_text" dbtype="text" phptype="text" null="true" default="" />
+
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="createdby" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+
+        <field key="editedon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="editedby" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+
+        <field key="published" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />
+        <field key="deleted" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" />
+        <field key="deletedon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="deletedby" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
 
 
         <index alias="object_id" name="object_id" primary="false" unique="false" type="BTREE">
@@ -102,9 +152,20 @@
         <field key="object_id" dbtype="varchar" precision="255" phptype="string" attributes="unsigned" null="true" default="" />
         <field key="client_id" dbtype="varchar" precision="255" phptype="string" attributes="unsigned" null="true" default="" />
         <field key="user_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
-        <field key="date_add" dbtype="integer" precision="60" phptype="integer" null="true" default="0" />
         <field key="date_overview" dbtype="integer" precision="10" phptype="integer" null="true" default="0" />
         <field key="comment" dbtype="text" phptype="text" null="true" default="" />
+
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="createdby" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+
+        <field key="editedon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="editedby" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+
+        <field key="published" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />
+        <field key="deleted" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" />
+        <field key="deletedon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="deletedby" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+
 
         <index alias="object_id" name="object_id" primary="false" unique="false" type="BTREE">
             <column key="object_id" length="" collation="A" null="false" />
@@ -121,12 +182,15 @@
 
     <object class="crmHistory" table="modcrm_histories" extends="xPDOSimpleObject">
         <field key="type" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="date_add" dbtype="integer" precision="60" phptype="integer" null="true" default="0" />
         <field key="object_id" dbtype="varchar" precision="255" phptype="string" attributes="unsigned" null="true" default="" />
         <field key="client_id" dbtype="varchar" precision="255" phptype="string" attributes="unsigned" null="true" default="" />
         <field key="event_id" dbtype="varchar" precision="255" phptype="string" attributes="unsigned" null="true" default="" />
         <field key="comment_id" dbtype="varchar" precision="255" phptype="string" attributes="unsigned" null="true" default="" />
         <field key="user_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
+
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="createdby" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+
 
         <index alias="object_id" name="object_id" primary="false" unique="false" type="BTREE">
             <column key="object_id" length="" collation="A" null="false" />
