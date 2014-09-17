@@ -11,7 +11,12 @@ if ($object->xpdo) {
 
 			$manager = $modx->getManager();
 			$objects = array(
-				'modCRMItem',
+				'crmClient',
+				'crmComment',
+				'crmEvent',
+				'crmFile',
+				'crmHistory',
+				'crmObject',
 			);
 			foreach ($objects as $tmp) {
 				$manager->createObjectContainer($tmp);
