@@ -7,8 +7,8 @@ $xpdo_meta_map['crmEvent']= array (
   'fields' => 
   array (
     'category' => '',
-    'object_id' => '',
-    'client_id' => '',
+    'object_id' => 0,
+    'client_id' => 0,
     'user_id' => 0,
     'date_overview' => 0,
     'comment' => '',
@@ -33,21 +33,21 @@ $xpdo_meta_map['crmEvent']= array (
     ),
     'object_id' => 
     array (
-      'dbtype' => 'varchar',
-      'precision' => '255',
-      'phptype' => 'string',
+      'dbtype' => 'integer',
+      'precision' => '60',
+      'phptype' => 'integer',
       'attributes' => 'unsigned',
       'null' => true,
-      'default' => '',
+      'default' => 0,
     ),
     'client_id' => 
     array (
-      'dbtype' => 'varchar',
-      'precision' => '255',
-      'phptype' => 'string',
+      'dbtype' => 'integer',
+      'precision' => '60',
+      'phptype' => 'integer',
       'attributes' => 'unsigned',
       'null' => true,
-      'default' => '',
+      'default' => 0,
     ),
     'user_id' => 
     array (

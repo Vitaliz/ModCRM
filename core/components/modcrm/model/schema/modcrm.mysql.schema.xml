@@ -149,8 +149,8 @@
 
     <object class="crmEvent" table="modcrm_events" extends="xPDOSimpleObject">
         <field key="category" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
-        <field key="object_id" dbtype="varchar" precision="255" phptype="string" attributes="unsigned" null="true" default="" />
-        <field key="client_id" dbtype="varchar" precision="255" phptype="string" attributes="unsigned" null="true" default="" />
+        <field key="object_id" dbtype="integer" precision="60" phptype="integer" attributes="unsigned" null="true" default="0" />
+        <field key="client_id" dbtype="integer" precision="60" phptype="integer" attributes="unsigned" null="true" default="0" />
         <field key="user_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
         <field key="date_overview" dbtype="integer" precision="10" phptype="integer" null="true" default="0" />
         <field key="comment" dbtype="text" phptype="text" null="true" default="" />
@@ -182,9 +182,9 @@
 
     <object class="crmHistory" table="modcrm_histories" extends="xPDOSimpleObject">
         <field key="type" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="object_id" dbtype="varchar" precision="255" phptype="string" attributes="unsigned" null="true" default="" />
-        <field key="client_id" dbtype="varchar" precision="255" phptype="string" attributes="unsigned" null="true" default="" />
-        <field key="event_id" dbtype="varchar" precision="255" phptype="string" attributes="unsigned" null="true" default="" />
+        <field key="object_id" dbtype="integer" precision="60" phptype="integer" attributes="unsigned" null="true" default="0" />
+        <field key="client_id" dbtype="integer" precision="60" phptype="integer" attributes="unsigned" null="true" default="0" />
+        <field key="event_id" dbtype="integer" precision="60" phptype="integer" attributes="unsigned" null="true" default="0" />
         <field key="comment_id" dbtype="varchar" precision="255" phptype="string" attributes="unsigned" null="true" default="" />
         <field key="user_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
 
