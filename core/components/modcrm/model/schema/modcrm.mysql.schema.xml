@@ -1,13 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model package="modcrm" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="modcrm" version="1.1">
 
-	<object class="modCRMItem" table="modcrm_items" extends="xPDOSimpleObject">
-		<field key="name" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
-		<field key="description" dbtype="text" phptype="text" null="true" default="" />
+	<object class="crmObject" table="modcrm_objects" extends="xPDOSimpleObject">
+		<field key="adress" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+		<field key="category" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="type" dbtype="text" phptype="text" null="true" default="" />
+		<field key="property_type" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="date_add" dbtype="integer" precision="60" phptype="integer" null="true" default="0" />
+        <field key="price" dbtype="integer" precision="60" phptype="integer" null="true" default="0" />
+        <field key="price_torg" dbtype="integer" precision="10" phptype="integer" null="true" default="0" />
+        <field key="fio" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="phone" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="floor" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="room_numbers" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="room_hostel" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="room_fraction" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="room_fraction_size" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="new_building_developer" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="room_fraction_deadline" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="total_area" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="living_area" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="kitchen_area" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="land_area" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="dom_type" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="dom_type_another" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="loggia" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="loggia_ins" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="loggia_glazed" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="sur" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="furniture" dbtype="text" phptype="text" null="true" default="" />
+        <field key="repair" dbtype="text" phptype="text" null="true" default="" />
+        <field key="documents" dbtype="text" phptype="text" null="true" default="" />
+        <field key="documents_dkp" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
 
-		<index alias="name" name="name" primary="false" unique="false" type="BTREE">
-			<column key="name" length="" collation="A" null="false" />
+		<index alias="adress" name="adress" primary="false" unique="false" type="BTREE">
+			<column key="adress" length="" collation="A" null="false" />
 		</index>
-	</object>
+
+        <composite alias="Events" class="crmEvent" local="id" foreign="object_id" cardinality="many" owner="local" />
+        <composite alias="Comments" class="crmComment" local="id" foreign="object_id" cardinality="many" owner="local" />
+        <aggregate alias="Histories" class="crmHistory" local="id" foreign="object_id" cardinality="one" owner="local" />
+
+    </object>
+
+    <object class="crmFile" table="modcrm_files" extends="xPDOSimpleObject">
+        <field key="fio" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="date_add" dbtype="integer" precision="60" phptype="integer" null="true" default="0" />
+        <field key="phone" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="adress" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="price" dbtype="integer" precision="10" phptype="integer" null="true" default="0" />
+        <field key="price_type" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+
+        <index alias="fio" name="fio" primary="false" unique="false" type="BTREE">
+            <column key="fio" length="" collation="A" null="false" />
+        </index>
+
+        <composite alias="Events" class="crmEvent" local="id" foreign="client_id" cardinality="many" owner="local" />
+        <composite alias="Comments" class="crmComment" local="id" foreign="client_id" cardinality="many" owner="local" />
+        <aggregate alias="Histories" class="crmHistory" local="id" foreign="client_id" cardinality="one" owner="local" />
+    </object>
+
+    <object class="crmClient" table="modcrm_clients" extends="xPDOSimpleObject">
+        <field key="fio" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="date_add" dbtype="integer" precision="60" phptype="integer" null="true" default="0" />
+        <field key="phone" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="adress" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="price" dbtype="integer" precision="10" phptype="integer" null="true" default="0" />
+        <field key="price_type" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+
+        <index alias="fio" name="fio" primary="false" unique="false" type="BTREE">
+            <column key="fio" length="" collation="A" null="false" />
+        </index>
+
+        <composite alias="Events" class="crmEvent" local="id" foreign="client_id" cardinality="many" owner="local" />
+        <composite alias="Comments" class="crmComment" local="id" foreign="client_id" cardinality="many" owner="local" />
+        <aggregate alias="Histories" class="crmHistory" local="id" foreign="client_id" cardinality="one" owner="local" />
+    </object>
+
+    <object class="crmComment" table="modcrm_comments" extends="xPDOSimpleObject">
+        <field key="object_id" dbtype="integer" precision="60" phptype="integer" attributes="unsigned" null="true" default="0" />
+        <field key="client_id" dbtype="integer" precision="60" phptype="integer" attributes="unsigned" null="true" default="0" />
+        <field key="user_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
+        <field key="date_add" dbtype="integer" precision="60" phptype="integer" null="true" default="0" />
+        <field key="comment_text" dbtype="text" phptype="text" null="true" default="" />
+
+
+        <index alias="object_id" name="object_id" primary="false" unique="false" type="BTREE">
+            <column key="object_id" length="" collation="A" null="false" />
+        </index>
+        <index alias="client_id" name="client_id" primary="false" unique="false" type="BTREE">
+            <column key="client_id" length="" collation="A" null="false" />
+        </index>
+        <aggregate alias="Clients" class="crmClient" local="client_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Objects" class="crmObject" local="object_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="User" class="modUser" local="user_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Histories" class="crmHistory" local="id" foreign="client_id" cardinality="one" owner="local" />
+    </object>
+
+    <object class="crmEvent" table="modcrm_events" extends="xPDOSimpleObject">
+        <field key="category" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="object_id" dbtype="varchar" precision="255" phptype="string" attributes="unsigned" null="true" default="" />
+        <field key="client_id" dbtype="varchar" precision="255" phptype="string" attributes="unsigned" null="true" default="" />
+        <field key="user_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
+        <field key="date_add" dbtype="integer" precision="60" phptype="integer" null="true" default="0" />
+        <field key="date_overview" dbtype="integer" precision="10" phptype="integer" null="true" default="0" />
+        <field key="comment" dbtype="text" phptype="text" null="true" default="" />
+
+        <index alias="object_id" name="object_id" primary="false" unique="false" type="BTREE">
+            <column key="object_id" length="" collation="A" null="false" />
+        </index>
+        <index alias="client_id" name="client_id" primary="false" unique="false" type="BTREE">
+            <column key="client_id" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Clients" class="crmClient" local="client_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Objects" class="crmObject" local="object_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="User" class="modUser" local="user_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Histories" class="crmHistory" local="id" foreign="client_id" cardinality="one" owner="local" />
+    </object>
+
+    <object class="crmHistory" table="modcrm_histories" extends="xPDOSimpleObject">
+        <field key="type" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="date_add" dbtype="integer" precision="60" phptype="integer" null="true" default="0" />
+        <field key="object_id" dbtype="varchar" precision="255" phptype="string" attributes="unsigned" null="true" default="" />
+        <field key="client_id" dbtype="varchar" precision="255" phptype="string" attributes="unsigned" null="true" default="" />
+        <field key="event_id" dbtype="varchar" precision="255" phptype="string" attributes="unsigned" null="true" default="" />
+        <field key="comment_id" dbtype="varchar" precision="255" phptype="string" attributes="unsigned" null="true" default="" />
+        <field key="user_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
+
+        <index alias="object_id" name="object_id" primary="false" unique="false" type="BTREE">
+            <column key="object_id" length="" collation="A" null="false" />
+        </index>
+        <index alias="client_id" name="client_id" primary="false" unique="false" type="BTREE">
+            <column key="client_id" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Clients" class="crmClient" local="client_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Objects" class="crmObject" local="object_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Events" class="crmEvent" local="event_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Comments" class="crmComment" local="comment_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="User" class="modUser" local="user_id" foreign="id" cardinality="one" owner="foreign" />
+    </object>
 
 </model>
