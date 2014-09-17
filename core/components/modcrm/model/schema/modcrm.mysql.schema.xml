@@ -185,7 +185,7 @@
         <field key="object_id" dbtype="integer" precision="60" phptype="integer" attributes="unsigned" null="true" default="0" />
         <field key="client_id" dbtype="integer" precision="60" phptype="integer" attributes="unsigned" null="true" default="0" />
         <field key="event_id" dbtype="integer" precision="60" phptype="integer" attributes="unsigned" null="true" default="0" />
-        <field key="comment_id" dbtype="varchar" precision="255" phptype="string" attributes="unsigned" null="true" default="" />
+        <field key="comment_id" dbtype="integer" precision="60" phptype="integer" attributes="unsigned" null="true" default="0" />
         <field key="user_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
 
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
