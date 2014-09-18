@@ -27,7 +27,7 @@ class modCRMHomeManagerController extends modCRMMainController {
      * @return void
      */
     public function loadCustomCssJs() {
-        $this->addJavascript($this->modCRM->config['jsUrl'] . 'mgr/widgets/items.grid.js');
+        $this->addJavascript($this->modCRM->config['jsUrl'] . 'mgr/widgets/objects.grid.js');
         $this->addJavascript($this->modCRM->config['jsUrl'] . 'mgr/widgets/home.panel.js');
         $this->addJavascript($this->modCRM->config['jsUrl'] . 'mgr/sections/home.js');
         $this->addHtml('<script type="text/javascript">

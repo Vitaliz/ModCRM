@@ -15,14 +15,14 @@ modCRM.panel.Home = function(config) {
 			,activeItem: 0
 			,hideMode: 'offsets'
 			,items: [{
-				title: _('modcrm_items')
+				title: _('modcrm_objects')
 				,items: [{
-					html: _('modcrm_intro_msg')
+					html: _('modcrm_objects_intro')
 					,border: false
 					,bodyCssClass: 'panel-desc'
 					,bodyStyle: 'margin-bottom: 10px'
 				},{
-					xtype: 'modcrm-grid-items'
+					xtype: 'modcrm-grid-objects'
 					,preventRender: true
 				}]
 			}]

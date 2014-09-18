@@ -1,8 +1,8 @@
-modCRM.grid.Items = function(config) {
+modCRM.grid.modCRM = function(config) {
 	config = config || {};
     this.sm = new Ext.grid.CheckboxSelectionModel();
 	Ext.applyIf(config,{
-		id: 'modcrm-grid-items'
+		id: 'modcrm-grid-modcrm'
 		,url: modCRM.config.connector_url
 		,baseParams: {
 			action: 'mgr/item/getlist'
@@ -18,7 +18,7 @@ modCRM.grid.Items = function(config) {
 			,{header: _('description'),dataIndex: 'description',width: 250}
 		]
 		,tbar: [{
-			text: _('modcrm_item_create')
+			text: _('modcrm_btn_create')
 			,handler: this.createItem
 			,scope: this
 		}]
@@ -29,9 +29,9 @@ modCRM.grid.Items = function(config) {
 			}
 		}
 	});
-	modCRM.grid.Items.superclass.constructor.call(this,config);
+	modCRM.grid.modCRM.superclass.constructor.call(this,config);
 };
-Ext.extend(modCRM.grid.Items,MODx.grid.Grid,{
+Ext.extend(modCRM.grid.modCRM,MODx.grid.Grid,{
 	windows: {}
 
 	,getMenu: function() {
@@ -39,7 +39,7 @@ Ext.extend(modCRM.grid.Items,MODx.grid.Grid,{
         var m = [];
         if (cs.split(',').length > 1) {
             m.push({
-    			text: _('modcrm_items_remove')
+    			text: _('modcrm_modcrm_remove')
     			,handler: this.removeSelected
     		});
         } else {
@@ -132,11 +132,11 @@ Ext.extend(modCRM.grid.Items,MODx.grid.Grid,{
         if (cs === false) return false;
 
         MODx.msg.confirm({
-			title: _('modcrm_items_remove')
-			,text: _('modcrm_items_remove_confirm')
+			title: _('modcrm_modcrm_remove')
+			,text: _('modcrm_modcrm_remove_confirm')
 			,url: this.config.url
 			,params: {
-                action: 'mgr/items/remove'
+                action: 'mgr/modcrm/remove'
                 ,items: cs
             }
             ,listeners: {
@@ -151,7 +151,7 @@ Ext.extend(modCRM.grid.Items,MODx.grid.Grid,{
         return true;
     }
 });
-Ext.reg('modcrm-grid-items',modCRM.grid.Items);
+Ext.reg('modcrm-grid-objects',modCRM.grid.modCRM);
 
 
 
